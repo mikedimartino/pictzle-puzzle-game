@@ -1,7 +1,14 @@
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 
-import Playground from './components/Playground';
+import ActivePuzzle from './components/ActivePuzzle';
+import { store } from './redux/store';
 
 const container = document.getElementById('app-root')!;
 const root = createRoot(container);
-root.render(<Playground />);
+
+root.render(
+  <Provider store={store}>
+    <ActivePuzzle />
+  </Provider>
+);
