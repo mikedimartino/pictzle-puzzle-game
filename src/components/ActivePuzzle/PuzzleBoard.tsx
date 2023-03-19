@@ -6,8 +6,6 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 import ImagePiece from './ImagePiece';
 
 const IMG_SRC = 'https://sentientmedia.org/wp-content/uploads/2021/03/sebastian-pena-lambarri-poly_hmhwJs-unsplash.jpg';
-const ROWS = 10;
-const COLUMNS = 10;
 
 const PuzzleBoardWrapper = styled.div<{ width: number, height: number }>`
   width: ${p => `${p.width}px`};
@@ -39,7 +37,7 @@ const PuzzleBoard = () => {
     image.onload = () => {
       // Wait for image to be loaded before doing anything.
       // Fixes issue where image sometimes does not appear on first render.
-      dispatch(load({ imageSrc: IMG_SRC, rows: ROWS, columns: COLUMNS }));
+      dispatch(load({ imageSrc: IMG_SRC }));
     }
   }, []);
 
