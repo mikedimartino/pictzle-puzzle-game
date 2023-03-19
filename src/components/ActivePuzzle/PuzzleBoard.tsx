@@ -6,8 +6,8 @@ import { useAppDispatch, useAppSelector } from '../../redux/store';
 import ImagePiece from './ImagePiece';
 
 const IMG_SRC = 'https://sentientmedia.org/wp-content/uploads/2021/03/sebastian-pena-lambarri-poly_hmhwJs-unsplash.jpg';
-const ROWS = 5;
-const COLUMNS = 5;
+const ROWS = 10;
+const COLUMNS = 10;
 
 const PuzzleBoardWrapper = styled.div<{ width: number, height: number }>`
   width: ${p => `${p.width}px`};

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { reset, shuffle } from '../../redux/slices/activePuzzleSlice';
@@ -8,9 +9,18 @@ const ButtonBar = styled.div`
   margin-bottom: 20px;
 `;
 
+const OriginalImage = styled.img`
+  margin-bottom: 20px
+`;
+
+const OriginalImageCheckboxWrapper = styled.div`
+  margin-top: 20px;
+`;
+
 const ActivePuzzle = () => {
   const dispatch = useAppDispatch();
-  const { selectedPieceIndex } = useAppSelector(state => state.activePuzzle);
+  const { selectedPieceIndex, imageSrc } = useAppSelector(state => state.activePuzzle);
+  const [showImage, setShowImage] = useState(false);
 
   return (
     <div>
@@ -23,6 +33,16 @@ const ActivePuzzle = () => {
         Selected piece: {selectedPieceIndex}
       </ButtonBar>
       <PuzzleBoard />
+      <OriginalImageCheckboxWrapper>
+        <input
+          type="checkbox"
+          checked={showImage}
+          onChange={() => setShowImage(val => !val)}
+          id="toggle-show-image"
+        />
+        <label htmlFor="toggle-show-image">Show original image</label>
+      </OriginalImageCheckboxWrapper>
+      { showImage && <OriginalImage src={imageSrc} /> }
     </div>
   );
 };
