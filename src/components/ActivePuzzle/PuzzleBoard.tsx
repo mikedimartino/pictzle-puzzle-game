@@ -34,7 +34,13 @@ const PuzzleBoard = () => {
   } = useAppSelector(state => state.activePuzzle);
 
   useEffect(() => {
-    dispatch(load({ imageSrc: IMG_SRC, rows: ROWS, columns: COLUMNS }));
+    const image = new Image();
+    image.src = IMG_SRC;
+    image.onload = () => {
+      // Wait for image to be loaded before doing anything.
+      // Fixes issue where image sometimes does not appear on first render.
+      dispatch(load({ imageSrc: IMG_SRC, rows: ROWS, columns: COLUMNS }));
+    }
   }, []);
 
   const pieceComponents = pieces.map(({ top, left }, index) => {
