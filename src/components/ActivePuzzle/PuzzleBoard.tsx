@@ -5,11 +5,12 @@ import { handlePieceClick, load } from '../../redux/slices/activePuzzleSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import ImagePiece from './ImagePiece';
 
-const IMG_SRC = 'https://sentientmedia.org/wp-content/uploads/2021/03/sebastian-pena-lambarri-poly_hmhwJs-unsplash.jpg';
+const IMG_SRC =
+  'https://sentientmedia.org/wp-content/uploads/2021/03/sebastian-pena-lambarri-poly_hmhwJs-unsplash.jpg';
 
-const PuzzleBoardWrapper = styled.div<{ width: number, height: number }>`
-  width: ${p => `${p.width}px`};
-  height: ${p => `${p.height}px`};
+const PuzzleBoardWrapper = styled.div<{ width: number; height: number }>`
+  width: ${(p) => `${p.width}px`};
+  height: ${(p) => `${p.height}px`};
 
   > div {
     margin-right: 1px;
@@ -29,7 +30,7 @@ const PuzzleBoard = () => {
     rows,
     columns,
     selectedPieceIndex,
-  } = useAppSelector(state => state.activePuzzle);
+  } = useAppSelector((state) => state.activePuzzle);
 
   useEffect(() => {
     const image = new Image();
@@ -38,7 +39,7 @@ const PuzzleBoard = () => {
       // Wait for image to be loaded before doing anything.
       // Fixes issue where image sometimes does not appear on first render.
       dispatch(load({ imageSrc: IMG_SRC }));
-    }
+    };
   }, [dispatch]);
 
   const pieceComponents = pieces.map(({ top, left }, index) => {
@@ -53,7 +54,7 @@ const PuzzleBoard = () => {
         onClick={() => dispatch(handlePieceClick(index))}
         isSelected={index === selectedPieceIndex}
       />
-    )
+    );
   });
 
   // Account for 1px of space between pieces
@@ -65,6 +66,6 @@ const PuzzleBoard = () => {
       {pieceComponents}
     </PuzzleBoardWrapper>
   );
-}
+};
 
 export default PuzzleBoard;

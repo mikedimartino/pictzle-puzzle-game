@@ -11,13 +11,13 @@ const root = createRoot(container);
 
 const router = createHashRouter([
   {
-    path: "/",
+    path: '/',
     element: <NewPuzzleSettings />,
   },
   {
-    path: "puzzle",
+    path: 'puzzle',
     element: <ActivePuzzle />,
-  }
+  },
 ]);
 
 root.render(

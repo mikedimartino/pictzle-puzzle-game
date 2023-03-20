@@ -15,6 +15,6 @@ const NewPuzzleSettings = () => {
       <Link to="puzzle">Start Puzzle</Link>
     </div>
   );
-}
+};
 
 export default NewPuzzleSettings;

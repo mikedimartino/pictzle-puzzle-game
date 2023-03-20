@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { selectIsValidPuzzle, selectUnsolvedPiecesCount } from '../../redux/selectors';
+import {
+  selectIsValidPuzzle,
+  selectUnsolvedPiecesCount,
+} from '../../redux/selectors';
 import { reset, shuffle } from '../../redux/slices/activePuzzleSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import PuzzleBoard from './PuzzleBoard';
@@ -12,7 +15,7 @@ const ButtonBar = styled.div`
 `;
 
 const OriginalImage = styled.img`
-  margin-bottom: 20px
+  margin-bottom: 20px;
 `;
 
 const OriginalImageCheckboxWrapper = styled.div`
@@ -23,9 +26,11 @@ const ActivePuzzle = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [showImage, setShowImage] = useState(false);
-  const { selectedPieceIndex, imageSrc } = useAppSelector(state => state.activePuzzle);
+  const { selectedPieceIndex, imageSrc } = useAppSelector(
+    (state) => state.activePuzzle
+  );
   const isValidPuzzle = useAppSelector(selectIsValidPuzzle);
-  const { isLoading } = useAppSelector(state => state.activePuzzle);
+  const { isLoading } = useAppSelector((state) => state.activePuzzle);
   const unsolvedPiecesCount = useAppSelector(selectUnsolvedPiecesCount);
 
   useEffect(() => {
@@ -41,8 +46,7 @@ const ActivePuzzle = () => {
         <button onClick={() => dispatch(shuffle())}>Shuffle</button>
         &nbsp;
         <button onClick={() => dispatch(reset())}>Reset</button>
-        &nbsp;
-        Selected piece: {selectedPieceIndex}
+        &nbsp; Selected piece: {selectedPieceIndex}
         <hr />
         Remaining out of position pieces: {unsolvedPiecesCount}
         <hr />
@@ -52,12 +56,12 @@ const ActivePuzzle = () => {
         <input
           type="checkbox"
           checked={showImage}
-          onChange={() => setShowImage(val => !val)}
+          onChange={() => setShowImage((val) => !val)}
           id="toggle-show-image"
         />
         <label htmlFor="toggle-show-image">Show original image</label>
       </OriginalImageCheckboxWrapper>
-      { showImage && <OriginalImage src={imageSrc} /> }
+      {showImage && <OriginalImage src={imageSrc} />}
     </div>
   );
 };

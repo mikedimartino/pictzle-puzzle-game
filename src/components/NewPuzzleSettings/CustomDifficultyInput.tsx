@@ -6,9 +6,12 @@ const MAX = 10;
 export type CustomDifficultyInputProps = {
   initialValue: number;
   onChange: (value: number) => void;
-}
+};
 
-const CustomDifficultyInput = ({ initialValue, onChange }: CustomDifficultyInputProps) => {
+const CustomDifficultyInput = ({
+  initialValue,
+  onChange,
+}: CustomDifficultyInputProps) => {
   const [value, setValue] = useState(initialValue);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -34,8 +37,7 @@ const CustomDifficultyInput = ({ initialValue, onChange }: CustomDifficultyInput
         value={value}
       />
     </div>
-    
-  )
+  );
 };
 
 export default CustomDifficultyInput;

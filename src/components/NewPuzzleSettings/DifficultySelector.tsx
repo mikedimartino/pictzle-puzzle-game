@@ -51,8 +51,14 @@ const DifficultySelector = () => {
   const [customColumns, setCustomColumns] = useState(DEFAULT_CUSTOM_COLUMNS);
 
   useEffect(() => {
-    const rows = difficulty === Difficulty.Custom ? customRows : DIFFICULTY_RC[difficulty].rows;
-    const columns = difficulty === Difficulty.Custom ? customColumns : DIFFICULTY_RC[difficulty].columns;
+    const rows =
+      difficulty === Difficulty.Custom
+        ? customRows
+        : DIFFICULTY_RC[difficulty].rows;
+    const columns =
+      difficulty === Difficulty.Custom
+        ? customColumns
+        : DIFFICULTY_RC[difficulty].columns;
     dispatch(updateDifficulty({ rows, columns }));
   }, [customRows, customColumns, difficulty, dispatch]);
 
@@ -81,7 +87,8 @@ const DifficultySelector = () => {
             value={Difficulty.Easy}
             checked={difficulty === Difficulty.Easy}
           />
-          Easy ({DIFFICULTY_RC[Difficulty.Easy].rows} &times; {DIFFICULTY_RC[Difficulty.Easy].columns})
+          Easy ({DIFFICULTY_RC[Difficulty.Easy].rows} &times;{' '}
+          {DIFFICULTY_RC[Difficulty.Easy].columns})
         </label>
         <label>
           <input
@@ -89,7 +96,8 @@ const DifficultySelector = () => {
             value={Difficulty.Medium}
             checked={difficulty === Difficulty.Medium}
           />
-          Medium ({DIFFICULTY_RC[Difficulty.Medium].rows} &times; {DIFFICULTY_RC[Difficulty.Medium].columns})
+          Medium ({DIFFICULTY_RC[Difficulty.Medium].rows} &times;{' '}
+          {DIFFICULTY_RC[Difficulty.Medium].columns})
         </label>
         <label>
           <input
@@ -97,7 +105,8 @@ const DifficultySelector = () => {
             value={Difficulty.Hard}
             checked={difficulty === Difficulty.Hard}
           />
-          Hard ({DIFFICULTY_RC[Difficulty.Hard].rows} &times; {DIFFICULTY_RC[Difficulty.Hard].columns})
+          Hard ({DIFFICULTY_RC[Difficulty.Hard].rows} &times;{' '}
+          {DIFFICULTY_RC[Difficulty.Hard].columns})
         </label>
         <label>
           <input
@@ -107,14 +116,20 @@ const DifficultySelector = () => {
           />
           <CustomDifficultyWrapper>
             Custom:&nbsp;
-            <CustomDifficultyInput initialValue={DEFAULT_CUSTOM_ROWS} onChange={handleCustomRowsChange} />
+            <CustomDifficultyInput
+              initialValue={DEFAULT_CUSTOM_ROWS}
+              onChange={handleCustomRowsChange}
+            />
             &nbsp;&times;&nbsp;
-            <CustomDifficultyInput initialValue={DEFAULT_CUSTOM_COLUMNS} onChange={handleCustomColumnsChange} />
+            <CustomDifficultyInput
+              initialValue={DEFAULT_CUSTOM_COLUMNS}
+              onChange={handleCustomColumnsChange}
+            />
           </CustomDifficultyWrapper>
         </label>
       </RadioButtonsWrapper>
     </section>
-  )
+  );
 };
 
 export default DifficultySelector;

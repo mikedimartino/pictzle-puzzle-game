@@ -35,9 +35,13 @@ const initialState: ActivePuzzleSliceState = {
   isLoading: true,
 };
 
-const resetPieces = (originalCoordinates: { top: number, left: number}[]) => {
-  return originalCoordinates
-    .map(({ top, left }, index) => ({ top, left, expectedIndex: index, actualIndex: index }));
+const resetPieces = (originalCoordinates: { top: number; left: number }[]) => {
+  return originalCoordinates.map(({ top, left }, index) => ({
+    top,
+    left,
+    expectedIndex: index,
+    actualIndex: index,
+  }));
 };
 
 export const activePuzzleSlice = createSlice({
@@ -46,7 +50,8 @@ export const activePuzzleSlice = createSlice({
   reducers: {
     load: (state, action: PayloadAction<{ imageSrc: string }>) => {
       const { imageSrc } = action.payload;
-      const { image, pieceHeight, pieceWidth, topLeftCoordinates } = divideImage(imageSrc, state.rows, state.columns);
+      const { image, pieceHeight, pieceWidth, topLeftCoordinates } =
+        divideImage(imageSrc, state.rows, state.columns);
 
       state.imageSrc = imageSrc;
       state.imageWidth = image.width;
@@ -64,7 +69,11 @@ export const activePuzzleSlice = createSlice({
         .map((piece, actualIndex) => ({ ...piece, actualIndex }));
     },
     reset: (state) => {
-      const { topLeftCoordinates } = divideImage(state.imageSrc, state.rows, state.columns);
+      const { topLeftCoordinates } = divideImage(
+        state.imageSrc,
+        state.rows,
+        state.columns
+      );
       state.pieces = resetPieces(topLeftCoordinates);
       state.selectedPieceIndex = null;
     },
@@ -77,19 +86,29 @@ export const activePuzzleSlice = createSlice({
       } else {
         // Swap
         const temp = state.pieces[index];
-        state.pieces[index] = { ...state.pieces[state.selectedPieceIndex], actualIndex: index };
-        state.pieces[state.selectedPieceIndex] = { ...temp, actualIndex: state.selectedPieceIndex };
+        state.pieces[index] = {
+          ...state.pieces[state.selectedPieceIndex],
+          actualIndex: index,
+        };
+        state.pieces[state.selectedPieceIndex] = {
+          ...temp,
+          actualIndex: state.selectedPieceIndex,
+        };
         state.selectedPieceIndex = null;
       }
     },
-    updateDifficulty: (state, action: PayloadAction<{ rows: number, columns: number}>) => {
+    updateDifficulty: (
+      state,
+      action: PayloadAction<{ rows: number; columns: number }>
+    ) => {
       const { rows, columns } = action.payload;
       state.rows = rows;
       state.columns = columns;
-    }
-  }
+    },
+  },
 });
 
-export const { load, shuffle, reset, handlePieceClick, updateDifficulty } = activePuzzleSlice.actions;
+export const { load, shuffle, reset, handlePieceClick, updateDifficulty } =
+  activePuzzleSlice.actions;
 
 export default activePuzzleSlice.reducer;

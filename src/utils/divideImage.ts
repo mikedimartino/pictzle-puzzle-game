@@ -1,4 +1,8 @@
-export default function divideImage(src: string, rows: number, columns: number) {
+export default function divideImage(
+  src: string,
+  rows: number,
+  columns: number
+) {
   const image = new Image();
   image.src = src;
 
