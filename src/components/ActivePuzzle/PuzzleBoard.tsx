@@ -39,7 +39,7 @@ const PuzzleBoard = () => {
       // Fixes issue where image sometimes does not appear on first render.
       dispatch(load({ imageSrc: IMG_SRC }));
     }
-  }, []);
+  }, [dispatch]);
 
   const pieceComponents = pieces.map(({ top, left }, index) => {
     return (

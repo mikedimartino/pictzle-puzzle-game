@@ -6,7 +6,7 @@ import ActivePuzzle from './components/ActivePuzzle';
 import NewPuzzleSettings from './components/NewPuzzleSettings';
 import { store } from './redux/store';
 
-const container = document.getElementById('app-root')!;
+const container = document.getElementById('app-root') as HTMLInputElement;
 const root = createRoot(container);
 
 const router = createHashRouter([

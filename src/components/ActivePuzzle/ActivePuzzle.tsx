@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
+import { selectIsValidPuzzle, selectUnsolvedPiecesCount } from '../../redux/selectors';
 import { reset, shuffle } from '../../redux/slices/activePuzzleSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import PuzzleBoard from './PuzzleBoard';
-import { selectIsValidPuzzle, selectUnsolvedPiecesCount } from '../../redux/selectors';
 
 const ButtonBar = styled.div`
   margin-bottom: 20px;
@@ -32,7 +32,7 @@ const ActivePuzzle = () => {
     if (!isLoading && !isValidPuzzle) {
       navigate('/');
     }
-  }, [isLoading, isValidPuzzle]);
+  }, [isLoading, isValidPuzzle, navigate]);
 
   return (
     <div>
