@@ -26,4 +26,9 @@ module.exports = {
       template: 'index.html',
     }),
   ],
+  resolve: {
+    alias: {
+      '@mui/styled-engine': '@mui/styled-engine-sc',
+    },
+  }
 };
