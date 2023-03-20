@@ -1,13 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { PuzzlePiece } from '../../types';
 import divideImage from '../../utils/divideImage';
-
-type PuzzlePiece = {
-  top: number;
-  left: number;
-  expectedIndex: number;
-  actualIndex: number;
-};
+import shufflePieces from '../../utils/shufflePieces';
 
 type ActivePuzzleSliceState = {
   imageSrc: string;
@@ -35,15 +30,6 @@ const initialState: ActivePuzzleSliceState = {
   isLoading: true,
 };
 
-const resetPieces = (originalCoordinates: { top: number; left: number }[]) => {
-  return originalCoordinates.map(({ top, left }, index) => ({
-    top,
-    left,
-    expectedIndex: index,
-    actualIndex: index,
-  }));
-};
-
 export const activePuzzleSlice = createSlice({
   name: 'activePuzzle',
   initialState,
@@ -58,24 +44,9 @@ export const activePuzzleSlice = createSlice({
       state.imageHeight = image.height;
       state.pieceHeight = pieceHeight;
       state.pieceWidth = pieceWidth;
-      state.pieces = resetPieces(topLeftCoordinates);
       state.selectedPieceIndex = null;
       state.isLoading = false;
-    },
-    shuffle: (state) => {
-      state.selectedPieceIndex = null;
-      state.pieces = state.pieces
-        .sort(() => Math.random() - 0.5)
-        .map((piece, actualIndex) => ({ ...piece, actualIndex }));
-    },
-    reset: (state) => {
-      const { topLeftCoordinates } = divideImage(
-        state.imageSrc,
-        state.rows,
-        state.columns
-      );
-      state.pieces = resetPieces(topLeftCoordinates);
-      state.selectedPieceIndex = null;
+      state.pieces = shufflePieces(topLeftCoordinates);
     },
     handlePieceClick: (state, action: PayloadAction<number>) => {
       const index = action.payload;
@@ -108,7 +79,7 @@ export const activePuzzleSlice = createSlice({
   },
 });
 
-export const { load, shuffle, reset, handlePieceClick, updateDifficulty } =
+export const { load, handlePieceClick, updateDifficulty } =
   activePuzzleSlice.actions;
 
 export default activePuzzleSlice.reducer;
