@@ -1,4 +1,5 @@
 import { PuzzlePiece } from '../types';
+import randomize from './randomize';
 import swap from './swap';
 
 function swapPiecesInCorrectPosition(pieces: PuzzlePiece[]) {
@@ -30,16 +31,16 @@ function swapPiecesInCorrectPosition(pieces: PuzzlePiece[]) {
 export default function shufflePieces(
   originalCoordinates: { top: number; left: number }[]
 ): PuzzlePiece[] {
-  const randomizedPieces = originalCoordinates
-    .map(({ top, left }, index) => ({
-      top,
-      left,
-      expectedIndex: index,
-    }))
-    .sort(() => Math.random() - 0.5);
+  const pieces = originalCoordinates.map(({ top, left }, index) => ({
+    top,
+    left,
+    expectedIndex: index,
+  }));
+
+  randomize(pieces);
 
   // Do another pass, swapping any pieces that are in their correct positions after randomization
-  swapPiecesInCorrectPosition(randomizedPieces);
+  swapPiecesInCorrectPosition(pieces);
 
-  return randomizedPieces;
+  return pieces;
 }

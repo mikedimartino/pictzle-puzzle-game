@@ -6,8 +6,9 @@ import HollywoodPalms from './assets/images/hollywood-palms.jpg';
 import Panda from './assets/images/panda.jpg';
 import SnowyMountainLake from './assets/images/snowy-mountain-lake.jpg';
 import VolkswagenBug from './assets/images/vw-bug.jpg';
+import randomize from './utils/randomize';
 
-export default {
+export const imageList = randomize([
   BeachStreet,
   BuffaloGrazing,
   CaliforniaCoast,
@@ -16,15 +17,6 @@ export default {
   Panda,
   SnowyMountainLake,
   VolkswagenBug,
-};
+]);
 
-export const imageList = [
-  BeachStreet,
-  BuffaloGrazing,
-  CaliforniaCoast,
-  Clownfish,
-  HollywoodPalms,
-  Panda,
-  SnowyMountainLake,
-  VolkswagenBug,
-];
+export default imageList;

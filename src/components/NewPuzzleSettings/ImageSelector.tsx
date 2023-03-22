@@ -3,7 +3,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import { useContext } from 'react';
 import styled from 'styled-components';
 
-import { imageList } from '../../puzzleImages';
+import puzzleImages from '../../puzzleImages';
 import { SettingsContext } from './SettingsContext';
 
 const StyledImage = styled.img<{ isSelected: boolean }>`
@@ -30,7 +30,7 @@ const ImageSelector = () => {
     <ImageSelectorWrapper>
       <h2>Pick an image:</h2>
       <ImageList cols={3} gap={5}>
-        {imageList.map((imageSrc) => (
+        {puzzleImages.map((imageSrc) => (
           <ImageListItem key={imageSrc}>
             <StyledImage
               src={imageSrc}
