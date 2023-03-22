@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { NOOP } from '../../constants';
-import { updateDifficulty } from '../../redux/slices/activePuzzleSlice';
 import { useAppDispatch } from '../../redux/store';
 import CustomDifficultyInput from './CustomDifficultyInput';
+import { SettingsContext } from './SettingsContext';
 
 const DEFAULT_CUSTOM_ROWS = 5;
 const DEFAULT_CUSTOM_COLUMNS = 5;
@@ -50,6 +50,8 @@ const DifficultySelector = () => {
   const [customRows, setCustomRows] = useState(DEFAULT_CUSTOM_ROWS);
   const [customColumns, setCustomColumns] = useState(DEFAULT_CUSTOM_COLUMNS);
 
+  const { setRows, setColumns } = useContext(SettingsContext);
+
   useEffect(() => {
     const rows =
       difficulty === Difficulty.Custom
@@ -59,8 +61,10 @@ const DifficultySelector = () => {
       difficulty === Difficulty.Custom
         ? customColumns
         : DIFFICULTY_RC[difficulty].columns;
-    dispatch(updateDifficulty({ rows, columns }));
-  }, [customRows, customColumns, difficulty, dispatch]);
+
+    setRows(rows);
+    setColumns(columns);
+  }, [customRows, customColumns, difficulty, dispatch, setRows, setColumns]);
 
   const handleDifficultyChange = (event: React.FormEvent<HTMLDivElement>) => {
     const value = (event.target as HTMLInputElement).value as Difficulty;

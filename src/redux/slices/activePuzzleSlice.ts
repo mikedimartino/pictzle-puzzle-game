@@ -14,7 +14,6 @@ type ActivePuzzleSliceState = {
   pieceWidth: number;
   pieces: PuzzlePiece[];
   selectedPieceIndex: number | null;
-  isLoading: boolean;
 };
 
 const initialState: ActivePuzzleSliceState = {
@@ -27,7 +26,6 @@ const initialState: ActivePuzzleSliceState = {
   pieceWidth: 0,
   pieces: [],
   selectedPieceIndex: null,
-  isLoading: true,
 };
 
 export const activePuzzleSlice = createSlice({
@@ -45,7 +43,6 @@ export const activePuzzleSlice = createSlice({
       state.pieceHeight = pieceHeight;
       state.pieceWidth = pieceWidth;
       state.selectedPieceIndex = null;
-      state.isLoading = false;
       state.pieces = shufflePieces(topLeftCoordinates);
     },
     handlePieceClick: (state, action: PayloadAction<number>) => {
@@ -68,18 +65,16 @@ export const activePuzzleSlice = createSlice({
         state.selectedPieceIndex = null;
       }
     },
-    updateDifficulty: (
+    updateSettings: (
       state,
-      action: PayloadAction<{ rows: number; columns: number }>
+      action: PayloadAction<{ rows: number; columns: number; imageSrc: string }>
     ) => {
-      const { rows, columns } = action.payload;
-      state.rows = rows;
-      state.columns = columns;
+      return { ...state, ...action.payload };
     },
   },
 });
 
-export const { load, handlePieceClick, updateDifficulty } =
+export const { load, handlePieceClick, updateSettings } =
   activePuzzleSlice.actions;
 
 export default activePuzzleSlice.reducer;

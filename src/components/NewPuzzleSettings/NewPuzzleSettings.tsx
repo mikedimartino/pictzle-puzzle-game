@@ -1,19 +1,47 @@
-import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { load, updateSettings } from '../../redux/slices/activePuzzleSlice';
+import { useAppDispatch } from '../../redux/store';
 import DifficultySelector from './DifficultySelector';
+import ImageSelector from './ImageSelector';
+import { SettingsContext, SettingsContextValue } from './SettingsContext';
 
 const NewPuzzleSettings = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [imageSrc, setImageSrc] = useState('');
+  const [rows, setRows] = useState(0);
+  const [columns, setColumns] = useState(0);
+
+  const contextValue: SettingsContextValue = {
+    imageSrc,
+    setImageSrc,
+    rows,
+    setRows,
+    columns,
+    setColumns,
+  };
+
+  const handleStartPuzzle = () => {
+    dispatch(updateSettings({ rows, columns, imageSrc }));
+    dispatch(load({ imageSrc }));
+    navigate('/puzzle');
+  };
+
   return (
-    <div>
-      <section>
-        <h2>Pick an image:</h2>
-        <div>IMAGE CAROUSEL PLACEHOLDER</div>
-      </section>
-      <hr />
-      <DifficultySelector />
-      <hr />
-      <Link to="puzzle">Start Puzzle</Link>
-    </div>
+    <SettingsContext.Provider value={contextValue}>
+      <div>
+        <section>
+          <ImageSelector />
+        </section>
+        <hr />
+        <DifficultySelector />
+        <hr />
+        <Button onClick={handleStartPuzzle}>Start Puzzle</Button>
+      </div>
+    </SettingsContext.Provider>
   );
 };
 

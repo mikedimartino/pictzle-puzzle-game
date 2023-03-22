@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
   selectIsValidPuzzle,
   selectUnsolvedPiecesCount,
 } from '../../redux/selectors';
-import { load } from '../../redux/slices/activePuzzleSlice';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { useAppSelector } from '../../redux/store';
 import PuzzleBoard from './PuzzleBoard';
-
-const IMG_SRC =
-  'https://sentientmedia.org/wp-content/uploads/2021/03/sebastian-pena-lambarri-poly_hmhwJs-unsplash.jpg';
 
 const OriginalImage = styled.img`
   margin-bottom: 20px;
@@ -22,32 +18,21 @@ const OriginalImageCheckboxWrapper = styled.div`
 `;
 
 const ActivePuzzle = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [showImage, setShowImage] = useState(false);
   const { imageSrc } = useAppSelector((state) => state.activePuzzle);
   const isValidPuzzle = useAppSelector(selectIsValidPuzzle);
-  const { isLoading } = useAppSelector((state) => state.activePuzzle);
   const unsolvedPiecesCount = useAppSelector(selectUnsolvedPiecesCount);
 
   useEffect(() => {
-    if (!isLoading && !isValidPuzzle) {
+    if (!isValidPuzzle) {
       navigate('/');
     }
-  }, [isLoading, isValidPuzzle, navigate]);
-
-  useEffect(() => {
-    const image = new Image();
-    image.src = IMG_SRC;
-    image.onload = () => {
-      // Wait for image to be loaded before doing anything.
-      // Fixes issue where image sometimes does not appear on first render.
-      dispatch(load({ imageSrc: IMG_SRC }));
-    };
-  }, [dispatch]);
+  }, [isValidPuzzle, navigate]);
 
   return (
     <div>
+      <Link to="/">Back to Home</Link>
       <h1>Puzzle Game</h1>
       <p>Remaining out of position pieces: {unsolvedPiecesCount}</p>
       <hr />
