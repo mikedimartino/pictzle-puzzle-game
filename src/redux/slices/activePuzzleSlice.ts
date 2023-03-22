@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { PuzzlePiece } from '../../types';
 import divideImage from '../../utils/divideImage';
 import shufflePieces from '../../utils/shufflePieces';
+import swap from '../../utils/swap';
 
 type ActivePuzzleSliceState = {
   imageSrc: string;
@@ -57,16 +58,7 @@ export const activePuzzleSlice = createSlice({
       } else if (state.selectedPieceIndex === null) {
         state.selectedPieceIndex = index;
       } else {
-        // Swap
-        const temp = state.pieces[index];
-        state.pieces[index] = {
-          ...state.pieces[state.selectedPieceIndex],
-          actualIndex: index,
-        };
-        state.pieces[state.selectedPieceIndex] = {
-          ...temp,
-          actualIndex: state.selectedPieceIndex,
-        };
+        swap(state.pieces, index, state.selectedPieceIndex);
         state.selectedPieceIndex = null;
       }
     },

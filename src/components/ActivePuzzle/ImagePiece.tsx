@@ -7,6 +7,7 @@ type ImagePieceProps = {
   top: number;
   left: number;
   isSelected: boolean;
+  isSelectionEnabled: boolean;
 };
 
 const ImagePiece = styled.div<ImagePieceProps>`
@@ -18,6 +19,7 @@ const ImagePiece = styled.div<ImagePieceProps>`
   background: url(${(p) => p.src});
   background-position: -${(p) => p.left}px -${(p) => p.top}px;
   opacity: ${(p) => (p.isSelected ? 0.3 : 1)};
+  cursor: ${(p) => (p.isSelectionEnabled ? 'pointer' : 'default')};
 `;
 
 export default ImagePiece;

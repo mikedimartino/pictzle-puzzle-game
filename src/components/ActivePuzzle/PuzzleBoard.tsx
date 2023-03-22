@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { selectUnsolvedPiecesCount } from '../../redux/selectors';
 import { handlePieceClick } from '../../redux/slices/activePuzzleSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import ImagePiece from './ImagePiece';
@@ -28,6 +29,13 @@ const PuzzleBoard = () => {
     selectedPieceIndex,
     imageSrc,
   } = useAppSelector((state) => state.activePuzzle);
+  const isFinished = useAppSelector(selectUnsolvedPiecesCount) === 0;
+
+  const handleImagePieceClick = (index: number) => {
+    if (!isFinished) {
+      dispatch(handlePieceClick(index));
+    }
+  };
 
   const pieceComponents = pieces.map(({ top, left }, index) => {
     return (
@@ -38,8 +46,9 @@ const PuzzleBoard = () => {
         pieceWidth={pieceWidth}
         top={top}
         left={left}
-        onClick={() => dispatch(handlePieceClick(index))}
+        onClick={() => handleImagePieceClick(index)}
         isSelected={index === selectedPieceIndex}
+        isSelectionEnabled={!isFinished}
       />
     );
   });

@@ -23,6 +23,6 @@ export const selectIsValidPuzzle = (state: RootState) => {
 
 export const selectUnsolvedPiecesCount = (state: RootState) => {
   return state.activePuzzle.pieces.filter(
-    (piece) => piece.actualIndex !== piece.expectedIndex
+    (piece, index) => index !== piece.expectedIndex
   ).length;
 };
