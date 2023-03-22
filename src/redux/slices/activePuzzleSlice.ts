@@ -32,11 +32,16 @@ export const activePuzzleSlice = createSlice({
   name: 'activePuzzle',
   initialState,
   reducers: {
-    load: (state, action: PayloadAction<{ imageSrc: string }>) => {
-      const { imageSrc } = action.payload;
+    load: (
+      state,
+      action: PayloadAction<{ imageSrc: string; rows: number; columns: number }>
+    ) => {
+      const { imageSrc, rows, columns } = action.payload;
       const { image, pieceHeight, pieceWidth, topLeftCoordinates } =
         divideImage(imageSrc, state.rows, state.columns);
 
+      state.rows = rows;
+      state.columns = columns;
       state.imageSrc = imageSrc;
       state.imageWidth = image.width;
       state.imageHeight = image.height;
@@ -65,16 +70,9 @@ export const activePuzzleSlice = createSlice({
         state.selectedPieceIndex = null;
       }
     },
-    updateSettings: (
-      state,
-      action: PayloadAction<{ rows: number; columns: number; imageSrc: string }>
-    ) => {
-      return { ...state, ...action.payload };
-    },
   },
 });
 
-export const { load, handlePieceClick, updateSettings } =
-  activePuzzleSlice.actions;
+export const { load, handlePieceClick } = activePuzzleSlice.actions;
 
 export default activePuzzleSlice.reducer;

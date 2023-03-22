@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { load, updateSettings } from '../../redux/slices/activePuzzleSlice';
+import { load } from '../../redux/slices/activePuzzleSlice';
 import { useAppDispatch } from '../../redux/store';
 import DifficultySelector from './DifficultySelector';
 import ImageSelector from './ImageSelector';
@@ -25,8 +25,7 @@ const NewPuzzleSettings = () => {
   };
 
   const handleStartPuzzle = () => {
-    dispatch(updateSettings({ rows, columns, imageSrc }));
-    dispatch(load({ imageSrc }));
+    dispatch(load({ rows, columns, imageSrc }));
     navigate('/puzzle');
   };
 
