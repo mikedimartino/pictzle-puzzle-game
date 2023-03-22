@@ -10,16 +10,16 @@ type ImagePieceProps = {
   isSelectionEnabled: boolean;
 };
 
-const ImagePiece = styled.div<ImagePieceProps>`
-  display: inline-block;
-  margin: 0;
-  vertical-align: top;
-  height: ${(p) => `${p.pieceHeight}px`};
-  width: ${(p) => `${p.pieceWidth}px`};
-  background: url(${(p) => p.src});
-  background-position: -${(p) => p.left}px -${(p) => p.top}px;
-  opacity: ${(p) => (p.isSelected ? 0.3 : 1)};
-  cursor: ${(p) => (p.isSelectionEnabled ? 'pointer' : 'default')};
-`;
+const ImagePiece = styled.div<ImagePieceProps>((props) => ({
+  display: 'inline-block',
+  margin: 0,
+  verticalAlign: 'top',
+  height: `${props.pieceHeight}px`,
+  width: `${props.pieceWidth}px`,
+  background: `url(${props.src})`,
+  backgroundPosition: `-${props.left}px -${props.top}px`,
+  opacity: props.isSelected ? 0.3 : 1,
+  cursor: props.isSelectionEnabled ? 'pointer' : 'default',
+}));
 
 export default ImagePiece;

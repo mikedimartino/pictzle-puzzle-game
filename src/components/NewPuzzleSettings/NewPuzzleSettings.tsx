@@ -38,7 +38,9 @@ const NewPuzzleSettings = () => {
         <hr />
         <DifficultySelector />
         <hr />
-        <Button onClick={handleStartPuzzle}>Start Puzzle</Button>
+        <Button onClick={handleStartPuzzle} variant="contained">
+          Start Puzzle
+        </Button>
       </div>
     </SettingsContext.Provider>
   );
