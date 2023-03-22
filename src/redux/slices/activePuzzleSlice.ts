@@ -38,7 +38,7 @@ export const activePuzzleSlice = createSlice({
     ) => {
       const { imageSrc, rows, columns } = action.payload;
       const { image, pieceHeight, pieceWidth, topLeftCoordinates } =
-        divideImage(imageSrc, state.rows, state.columns);
+        divideImage(imageSrc, rows, columns);
 
       state.rows = rows;
       state.columns = columns;
