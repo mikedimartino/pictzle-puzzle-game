@@ -4,6 +4,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import styled from 'styled-components';
 
@@ -13,14 +14,20 @@ import useValidateStep from './hooks/useValidateStep';
 import ImageSelector from './ImageSelector';
 import SettingsConfirmation from './SettingsConfirmation';
 
+const StyledTitle = styled(Typography)`
+  margin-bottom: 20px;
+  margin-top: 10px;
+`;
+
 const StyledMain = styled.main`
-  width: 700px;
+  width: fit-content;
   margin-left: auto;
   margin-right: auto;
+  height: 100%;
 `;
 
 const StyledPaper = styled(Paper)`
-  width: 100%;
+  width: 700px;
   padding: 15px 20px;
 `;
 
@@ -77,6 +84,7 @@ const NewPuzzleSteps = () => {
   return (
     <StyledMain>
       <StyledPaper>
+        <StyledTitle variant="h4">Start a New Puzzle</StyledTitle>
         <Stepper activeStep={activeStep}>{steps}</Stepper>
         {renderStepContent()}
         <StepFooter>

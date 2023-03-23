@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
@@ -32,8 +32,6 @@ const ActivePuzzle = () => {
 
   return (
     <div>
-      <Link to="/">Back to Home</Link>
-      <h1>Puzzle Game</h1>
       <p>Remaining out of position pieces: {unsolvedPiecesCount}</p>
       <hr />
       <PuzzleBoard />

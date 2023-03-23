@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 
 import ActivePuzzle from './components/ActivePuzzle';
+import Header from './components/Header';
 import NewPuzzleSettings from './components/NewPuzzleSettings';
 import { store } from './redux/store';
 
@@ -22,6 +23,7 @@ const router = createHashRouter([
 
 root.render(
   <Provider store={store}>
+    <Header />
     <RouterProvider router={router} />
   </Provider>
 );
