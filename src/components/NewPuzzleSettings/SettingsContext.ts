@@ -23,7 +23,7 @@ export type SettingsContextValue = {
   setCustomColumns: (value: number) => void;
 };
 
-const defaultSettings: SettingsContextValue = {
+const defaultValue: SettingsContextValue = {
   imageSrc: '',
   setImageSrc: NOOP,
   rows: 0,
@@ -38,4 +38,4 @@ const defaultSettings: SettingsContextValue = {
   setCustomColumns: NOOP,
 };
 
-export const SettingsContext = createContext(defaultSettings);
+export const SettingsContext = createContext(defaultValue);

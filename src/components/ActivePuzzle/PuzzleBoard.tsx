@@ -1,8 +1,10 @@
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { selectUnsolvedPiecesCount } from '../../redux/selectors';
 import { handlePieceClick } from '../../redux/slices/activePuzzleSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { ActivePuzzleContext } from './ActivePuzzleContext';
 import ImagePiece from './ImagePiece';
 
 const PuzzleBoardWrapper = styled.div<{ width: number; height: number }>`
@@ -17,6 +19,9 @@ const PuzzleBoardWrapper = styled.div<{ width: number; height: number }>`
 
 const PuzzleBoard = () => {
   const dispatch = useAppDispatch();
+  const [hasStarted, setHasStarted] = useState(false);
+  const isFinished = useAppSelector(selectUnsolvedPiecesCount) === 0;
+  const { startTimer, stopTimer } = useContext(ActivePuzzleContext);
 
   const {
     pieces,
@@ -29,13 +34,22 @@ const PuzzleBoard = () => {
     selectedPieceIndex,
     imageSrc,
   } = useAppSelector((state) => state.activePuzzle);
-  const isFinished = useAppSelector(selectUnsolvedPiecesCount) === 0;
 
   const handleImagePieceClick = (index: number) => {
+    if (!hasStarted) {
+      setHasStarted(true);
+      startTimer();
+    }
     if (!isFinished) {
       dispatch(handlePieceClick(index));
     }
   };
+
+  useEffect(() => {
+    if (isFinished) {
+      stopTimer();
+    }
+  }, [isFinished, stopTimer]);
 
   const pieceComponents = pieces.map(({ top, left }, index) => {
     return (

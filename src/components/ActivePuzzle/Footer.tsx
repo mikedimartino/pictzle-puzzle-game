@@ -1,8 +1,11 @@
 import Typography from '@mui/material/Typography';
+import { useContext } from 'react';
 import styled from 'styled-components';
 
 import { selectUnsolvedPiecesCount } from '../../redux/selectors';
 import { useAppSelector } from '../../redux/store';
+import formatSeconds from '../../utils/formatSeconds';
+import { ActivePuzzleContext } from './ActivePuzzleContext';
 
 const Wrapper = styled.footer`
   display: flex;
@@ -23,6 +26,7 @@ const Footer = () => {
     (state) => state.activePuzzle
   );
   const unsolvedPiecesCount = useAppSelector(selectUnsolvedPiecesCount);
+  const { elapsedSeconds } = useContext(ActivePuzzleContext);
 
   const unsolvedPiecesContent = showUnsolvedPiecesCount ? (
     <Typography variant="caption">
@@ -31,7 +35,7 @@ const Footer = () => {
   ) : null;
 
   const elapsedTimeContent = showElapsedTime ? (
-    <Typography variant="caption">2:14</Typography>
+    <Typography variant="caption">{formatSeconds(elapsedSeconds)}</Typography>
   ) : null;
 
   const hasContent = showUnsolvedPiecesCount || showElapsedTime;
