@@ -18,6 +18,7 @@ type ActivePuzzleSliceState = {
   showUnsolvedPiecesCount: boolean;
   showElapsedTime: boolean;
   showImage: boolean;
+  totalMoves: number;
 };
 
 const initialState: ActivePuzzleSliceState = {
@@ -33,6 +34,7 @@ const initialState: ActivePuzzleSliceState = {
   showUnsolvedPiecesCount: true,
   showElapsedTime: true,
   showImage: false,
+  totalMoves: 0,
 };
 
 export const activePuzzleSlice = createSlice({
@@ -56,6 +58,7 @@ export const activePuzzleSlice = createSlice({
       state.pieceWidth = pieceWidth;
       state.selectedPieceIndex = null;
       state.pieces = shufflePieces(topLeftCoordinates);
+      state.totalMoves = 0;
     },
     handlePieceClick: (state, action: PayloadAction<number>) => {
       const index = action.payload;
@@ -66,6 +69,7 @@ export const activePuzzleSlice = createSlice({
       } else {
         swap(state.pieces, index, state.selectedPieceIndex);
         state.selectedPieceIndex = null;
+        state.totalMoves++;
       }
     },
     optionUpdated: (
