@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { SettingsContext } from '../../SettingsContext';
+import { SettingsContext } from '../SettingsContext';
 
 export type StepValidationResult = {
   hasValidationErrors: boolean;

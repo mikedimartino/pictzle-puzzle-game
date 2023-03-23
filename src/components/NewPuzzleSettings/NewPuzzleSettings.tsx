@@ -6,7 +6,7 @@ import {
   DEFAULT_DIFFICULTY,
   Difficulty,
 } from '../../constants';
-import NewPuzzleSteps from './NewPuzzleSteps/NewPuzzleSteps';
+import NewPuzzleSteps from './NewPuzzleSteps';
 import { SettingsContext, SettingsContextValue } from './SettingsContext';
 
 const NewPuzzleSettings = () => {

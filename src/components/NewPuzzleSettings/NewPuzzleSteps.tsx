@@ -7,10 +7,10 @@ import Tooltip from '@mui/material/Tooltip';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import ImageSelector from '../ImageSelector';
 import DifficultySelector from './DifficultySelector';
 import useStartPuzzle from './hooks/useStartPuzzle';
 import useValidateStep from './hooks/useValidateStep';
+import ImageSelector from './ImageSelector';
 import SettingsConfirmation from './SettingsConfirmation';
 
 const StyledMain = styled.main`

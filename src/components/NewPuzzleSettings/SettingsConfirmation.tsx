@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography';
 import { useContext } from 'react';
 import styled from 'styled-components';
 
-import { SettingsContext } from '../SettingsContext';
+import { SettingsContext } from './SettingsContext';
 
 const Wrapper = styled.div`
   padding: 20px 15px;
