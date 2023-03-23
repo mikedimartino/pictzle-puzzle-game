@@ -1,19 +1,21 @@
-import { Button } from '@mui/material';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { load } from '../../redux/slices/activePuzzleSlice';
-import { useAppDispatch } from '../../redux/store';
-import DifficultySelector from './DifficultySelector';
-import ImageSelector from './ImageSelector';
+import {
+  DEFAULT_CUSTOM_COLUMNS,
+  DEFAULT_CUSTOM_ROWS,
+  DEFAULT_DIFFICULTY,
+  Difficulty,
+} from '../../constants';
+import NewPuzzleSteps from './NewPuzzleSteps/NewPuzzleSteps';
 import { SettingsContext, SettingsContextValue } from './SettingsContext';
 
 const NewPuzzleSettings = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const [imageSrc, setImageSrc] = useState('');
   const [rows, setRows] = useState(0);
   const [columns, setColumns] = useState(0);
+  const [difficulty, setDifficulty] = useState<Difficulty>(DEFAULT_DIFFICULTY);
+  const [customRows, setCustomRows] = useState(DEFAULT_CUSTOM_ROWS);
+  const [customColumns, setCustomColumns] = useState(DEFAULT_CUSTOM_COLUMNS);
 
   const contextValue: SettingsContextValue = {
     imageSrc,
@@ -22,26 +24,17 @@ const NewPuzzleSettings = () => {
     setRows,
     columns,
     setColumns,
-  };
-
-  const handleStartPuzzle = () => {
-    dispatch(load({ rows, columns, imageSrc }));
-    navigate('/puzzle');
+    difficulty,
+    setDifficulty,
+    customRows,
+    setCustomRows,
+    customColumns,
+    setCustomColumns,
   };
 
   return (
     <SettingsContext.Provider value={contextValue}>
-      <div>
-        <section>
-          <ImageSelector />
-        </section>
-        <hr />
-        <DifficultySelector />
-        <hr />
-        <Button onClick={handleStartPuzzle} variant="contained">
-          Start Puzzle
-        </Button>
-      </div>
+      <NewPuzzleSteps />
     </SettingsContext.Provider>
   );
 };

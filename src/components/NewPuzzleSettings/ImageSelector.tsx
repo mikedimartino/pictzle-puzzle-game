@@ -13,8 +13,8 @@ const StyledImage = styled.img<{ isSelected: boolean }>`
 `;
 
 const ImageSelectorWrapper = styled.section`
-  width: 650px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
 `;
 
@@ -28,7 +28,6 @@ const ImageSelector = () => {
 
   return (
     <ImageSelectorWrapper>
-      <h2>Pick an image:</h2>
       <ImageList cols={3} gap={5}>
         {puzzleImages.map((imageSrc) => (
           <ImageListItem key={imageSrc}>
