@@ -1,28 +1,24 @@
-import { useEffect, useState } from 'react';
+import Paper from '@mui/material/Paper';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import {
-  selectIsValidPuzzle,
-  selectUnsolvedPiecesCount,
-} from '../../redux/selectors';
+import { selectIsValidPuzzle } from '../../redux/selectors';
 import { useAppSelector } from '../../redux/store';
+import Footer from './Footer';
 import PuzzleBoard from './PuzzleBoard';
+import TopBar from './TopBar';
 
-const OriginalImage = styled.img`
-  margin-bottom: 20px;
-`;
-
-const OriginalImageCheckboxWrapper = styled.div`
-  margin-top: 20px;
+const StyledPaper = styled(Paper)`
+  width: fit-content;
+  padding: 15px;
+  padding-top: 0;
+  margin: auto;
 `;
 
 const ActivePuzzle = () => {
   const navigate = useNavigate();
-  const [showImage, setShowImage] = useState(false);
-  const { imageSrc } = useAppSelector((state) => state.activePuzzle);
   const isValidPuzzle = useAppSelector(selectIsValidPuzzle);
-  const unsolvedPiecesCount = useAppSelector(selectUnsolvedPiecesCount);
 
   useEffect(() => {
     if (!isValidPuzzle) {
@@ -31,21 +27,13 @@ const ActivePuzzle = () => {
   }, [isValidPuzzle, navigate]);
 
   return (
-    <div>
-      <p>Remaining out of position pieces: {unsolvedPiecesCount}</p>
-      <hr />
-      <PuzzleBoard />
-      <OriginalImageCheckboxWrapper>
-        <input
-          type="checkbox"
-          checked={showImage}
-          onChange={() => setShowImage((val) => !val)}
-          id="toggle-show-image"
-        />
-        <label htmlFor="toggle-show-image">Show original image</label>
-      </OriginalImageCheckboxWrapper>
-      {showImage && <OriginalImage src={imageSrc} />}
-    </div>
+    <main>
+      <StyledPaper>
+        <TopBar />
+        <PuzzleBoard />
+        <Footer />
+      </StyledPaper>
+    </main>
   );
 };
 

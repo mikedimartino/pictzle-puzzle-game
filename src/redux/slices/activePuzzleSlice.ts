@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { PuzzlePiece } from '../../types';
+import { ActivePuzzleOptions, PuzzlePiece } from '../../types';
 import divideImage from '../../utils/divideImage';
 import shufflePieces from '../../utils/shufflePieces';
 import swap from '../../utils/swap';
@@ -15,6 +15,9 @@ type ActivePuzzleSliceState = {
   pieceWidth: number;
   pieces: PuzzlePiece[];
   selectedPieceIndex: number | null;
+  showUnsolvedPiecesCount: boolean;
+  showElapsedTime: boolean;
+  showImage: boolean;
 };
 
 const initialState: ActivePuzzleSliceState = {
@@ -27,6 +30,9 @@ const initialState: ActivePuzzleSliceState = {
   pieceWidth: 0,
   pieces: [],
   selectedPieceIndex: null,
+  showUnsolvedPiecesCount: true,
+  showElapsedTime: true,
+  showImage: false,
 };
 
 export const activePuzzleSlice = createSlice({
@@ -62,9 +68,16 @@ export const activePuzzleSlice = createSlice({
         state.selectedPieceIndex = null;
       }
     },
+    optionUpdated: (
+      state,
+      action: PayloadAction<Partial<ActivePuzzleOptions>>
+    ) => {
+      return { ...state, ...action.payload };
+    },
   },
 });
 
-export const { load, handlePieceClick } = activePuzzleSlice.actions;
+export const { load, handlePieceClick, optionUpdated } =
+  activePuzzleSlice.actions;
 
 export default activePuzzleSlice.reducer;

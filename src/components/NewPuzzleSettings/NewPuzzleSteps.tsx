@@ -28,7 +28,7 @@ const StyledMain = styled.main`
 
 const StyledPaper = styled(Paper)`
   width: 700px;
-  padding: 15px 20px;
+  padding: 10px 20px;
 `;
 
 const StepFooter = styled.div`
