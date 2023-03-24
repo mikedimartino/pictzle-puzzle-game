@@ -1,6 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 import Paper from '@mui/material/Paper';
+import { Resizable, ResizeDirection } from 're-resizable';
 import { useEffect, useRef, useState } from 'react';
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable';
 import styled from 'styled-components';
@@ -8,15 +9,19 @@ import styled from 'styled-components';
 import { updateOptions } from '../../redux/slices/activePuzzleSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 
-const Container = styled(Paper)<{ top: number; left: number }>(
+const StyledResizable = styled(Resizable)<{ top: number; left: number }>(
   ({ top, left }) => ({
-    padding: '5px',
-    width: 'fit-content',
-    position: 'absolute',
+    position: 'absolute !important' as any,
     top,
     left,
+    width: 'fit-content',
   })
 );
+
+const StyledPaper = styled(Paper)`
+  padding: 5px;
+  width: fit-content;
+`;
 
 const TopBar = styled.div`
   display: flex;
@@ -38,8 +43,17 @@ type Position = { top: number; left: number };
 const ImageModal = () => {
   const dispatch = useAppDispatch();
 
-  const { imageSrc, showImageModal, imageModalLeft, imageModalTop } =
-    useAppSelector((state) => state.activePuzzle);
+  const {
+    imageSrc,
+    showImageModal,
+    imageModalLeft,
+    imageModalTop,
+    imageWidth: originalImageWidth,
+  } = useAppSelector((state) => state.activePuzzle);
+
+  const [imageWidth, setImageWidth] = useState(originalImageWidth);
+  const [imageWidthAfterResize, setImageWidthAfterResize] =
+    useState(originalImageWidth);
 
   const [initialPosition, setInitialPosition] = useState<Position | null>(null);
   const modalPositionRef = useRef<Position>({
@@ -75,20 +89,41 @@ const ImageModal = () => {
     modalPositionRef.current.top = newTop;
   };
 
+  const handleResizeStop = () => {
+    setImageWidthAfterResize(imageWidth);
+  };
+
+  const handleResize = (
+    _0: MouseEvent | TouchEvent,
+    _1: ResizeDirection,
+    _2: HTMLElement,
+    delta: { width: number; height: number }
+  ) => {
+    setImageWidth(imageWidthAfterResize + delta.width);
+  };
+
   return showImageModal ? (
     <Draggable handle="#drag-handle" onStop={handleDragStop}>
-      <Container
+      <StyledResizable
         top={initialPosition?.top || 0}
         left={initialPosition?.left || 0}
+        size={{ width: 'fit-content', height: 'auto' }}
+        lockAspectRatio
+        onResizeStop={handleResizeStop}
+        onResize={handleResize}
+        minWidth="200px"
+        maxWidth={originalImageWidth + 200}
       >
-        <TopBar>
-          <DragHandle id="drag-handle">
-            <DragIndicatorIcon />
-          </DragHandle>
-          <StyledCloseIcon onClick={handleClose} />
-        </TopBar>
-        <img src={imageSrc} />
-      </Container>
+        <StyledPaper>
+          <TopBar>
+            <DragHandle id="drag-handle">
+              <DragIndicatorIcon />
+            </DragHandle>
+            <StyledCloseIcon onClick={handleClose} />
+          </TopBar>
+          <img src={imageSrc} width={imageWidth} />
+        </StyledPaper>
+      </StyledResizable>
     </Draggable>
   ) : null;
 };
