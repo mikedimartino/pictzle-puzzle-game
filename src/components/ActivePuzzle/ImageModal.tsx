@@ -112,7 +112,7 @@ const ImageModal = () => {
         onResizeStop={handleResizeStop}
         onResize={handleResize}
         minWidth="200px"
-        maxWidth={originalImageWidth + 200}
+        maxWidth={originalImageWidth + 300}
       >
         <StyledPaper>
           <TopBar>
