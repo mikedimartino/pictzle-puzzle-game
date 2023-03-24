@@ -69,6 +69,10 @@ export const activePuzzleSlice = createSlice({
       state.selectedPieceIndex = null;
       state.pieces = shufflePieces(topLeftCoordinates);
       state.totalMoves = 0;
+      state.showImageModal = false;
+      state.totalSecondsTakenToSolve = 0;
+      state.imageModalLeft = DEFAULT_ORIGINAL_IMAGE_LEFT;
+      state.imageModalTop = DEFAULT_ORIGINAL_IMAGE_TOP;
     },
     handlePieceClick: (state, action: PayloadAction<number>) => {
       const index = action.payload;
