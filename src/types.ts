@@ -10,4 +10,5 @@ export type ActivePuzzleOptions = {
   showImageModal: boolean;
   imageModalTop: number;
   imageModalLeft: number;
+  totalSecondsTakenToSolve: number;
 };

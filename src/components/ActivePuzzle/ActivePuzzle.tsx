@@ -9,6 +9,7 @@ import {
   ActivePuzzleContext,
   ActivePuzzleContextValue,
 } from './ActivePuzzleContext';
+import CompletionModal from './CompletionModal';
 import Footer from './Footer';
 import useTimer from './hooks/useTimer';
 import ImageModal from './ImageModal';
@@ -49,6 +50,7 @@ const ActivePuzzle = () => {
           <Footer />
         </StyledPaper>
         <ImageModal />
+        <CompletionModal />
       </div>
     </ActivePuzzleContext.Provider>
   );

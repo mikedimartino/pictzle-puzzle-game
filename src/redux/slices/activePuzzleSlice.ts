@@ -23,6 +23,7 @@ type ActivePuzzleSliceState = {
   showElapsedTime: boolean;
   showImageModal: boolean;
   totalMoves: number;
+  totalSecondsTakenToSolve: number;
   imageModalTop: number;
   imageModalLeft: number;
 };
@@ -38,6 +39,7 @@ const initialState: ActivePuzzleSliceState = {
   pieces: [],
   selectedPieceIndex: null,
   totalMoves: 0,
+  totalSecondsTakenToSolve: 0,
   showUnsolvedPiecesCount: true,
   showElapsedTime: true,
   showImageModal: false,

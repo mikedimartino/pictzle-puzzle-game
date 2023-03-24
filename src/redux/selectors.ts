@@ -26,3 +26,7 @@ export const selectUnsolvedPiecesCount = (state: RootState) => {
     (piece, index) => index !== piece.expectedIndex
   ).length;
 };
+
+export const selectIsFinished = (state: RootState) => {
+  return selectUnsolvedPiecesCount(state) === 0;
+};
