@@ -2,7 +2,7 @@ import ExtensionIcon from '@mui/icons-material/Extension';
 import Tooltip from '@mui/material/Tooltip';
 import styled from 'styled-components';
 
-import { optionUpdated } from '../../../redux/slices/activePuzzleSlice';
+import { updateOptions } from '../../../redux/slices/activePuzzleSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 
 const StyledIcon = styled(ExtensionIcon)`
@@ -22,7 +22,7 @@ const UnsolvedPiecesButton = () => {
 
   const handleClick = () => {
     dispatch(
-      optionUpdated({ showUnsolvedPiecesCount: !showUnsolvedPiecesCount })
+      updateOptions({ showUnsolvedPiecesCount: !showUnsolvedPiecesCount })
     );
   };
 

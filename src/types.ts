@@ -7,5 +7,7 @@ export type PuzzlePiece = {
 export type ActivePuzzleOptions = {
   showUnsolvedPiecesCount: boolean;
   showElapsedTime: boolean;
-  showImage: boolean;
+  showImageModal: boolean;
+  imageModalTop: number;
+  imageModalLeft: number;
 };

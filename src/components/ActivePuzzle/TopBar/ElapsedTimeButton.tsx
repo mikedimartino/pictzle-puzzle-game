@@ -2,7 +2,7 @@ import ElapsedTimeIcon from '@mui/icons-material/AccessTime';
 import Tooltip from '@mui/material/Tooltip';
 import styled from 'styled-components';
 
-import { optionUpdated } from '../../../redux/slices/activePuzzleSlice';
+import { updateOptions } from '../../../redux/slices/activePuzzleSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 
 const StyledIcon = styled(ElapsedTimeIcon)`
@@ -17,7 +17,7 @@ const ElapsedTimeButton = () => {
   const tooltipText = `${showElapsedTime ? 'Hide' : 'Show'} elapsed time`;
 
   const handleClick = () => {
-    dispatch(optionUpdated({ showElapsedTime: !showElapsedTime }));
+    dispatch(updateOptions({ showElapsedTime: !showElapsedTime }));
   };
 
   return (

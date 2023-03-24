@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
+import styled from 'styled-components';
 
 import ActivePuzzle from './components/ActivePuzzle';
 import Header from './components/Header';
@@ -21,9 +22,24 @@ const router = createHashRouter([
   },
 ]);
 
+const PageLayout = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Main = styled.main`
+  flex-grow: 1;
+  position: relative;
+`;
+
 root.render(
   <Provider store={store}>
-    <Header />
-    <RouterProvider router={router} />
+    <PageLayout>
+      <Header />
+      <Main>
+        <RouterProvider router={router} />
+      </Main>
+    </PageLayout>
   </Provider>
 );

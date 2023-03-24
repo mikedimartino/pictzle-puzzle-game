@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import {
+  DEFAULT_ORIGINAL_IMAGE_LEFT,
+  DEFAULT_ORIGINAL_IMAGE_TOP,
+} from '../../constants';
 import { ActivePuzzleOptions, PuzzlePiece } from '../../types';
 import divideImage from '../../utils/divideImage';
 import shufflePieces from '../../utils/shufflePieces';
@@ -17,8 +21,10 @@ type ActivePuzzleSliceState = {
   selectedPieceIndex: number | null;
   showUnsolvedPiecesCount: boolean;
   showElapsedTime: boolean;
-  showImage: boolean;
+  showImageModal: boolean;
   totalMoves: number;
+  imageModalTop: number;
+  imageModalLeft: number;
 };
 
 const initialState: ActivePuzzleSliceState = {
@@ -31,10 +37,12 @@ const initialState: ActivePuzzleSliceState = {
   pieceWidth: 0,
   pieces: [],
   selectedPieceIndex: null,
+  totalMoves: 0,
   showUnsolvedPiecesCount: true,
   showElapsedTime: true,
-  showImage: false,
-  totalMoves: 0,
+  showImageModal: false,
+  imageModalTop: DEFAULT_ORIGINAL_IMAGE_TOP,
+  imageModalLeft: DEFAULT_ORIGINAL_IMAGE_LEFT,
 };
 
 export const activePuzzleSlice = createSlice({
@@ -72,7 +80,7 @@ export const activePuzzleSlice = createSlice({
         state.totalMoves++;
       }
     },
-    optionUpdated: (
+    updateOptions: (
       state,
       action: PayloadAction<Partial<ActivePuzzleOptions>>
     ) => {
@@ -81,7 +89,7 @@ export const activePuzzleSlice = createSlice({
   },
 });
 
-export const { load, handlePieceClick, optionUpdated } =
+export const { load, handlePieceClick, updateOptions } =
   activePuzzleSlice.actions;
 
 export default activePuzzleSlice.reducer;

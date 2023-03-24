@@ -11,6 +11,7 @@ import {
 } from './ActivePuzzleContext';
 import Footer from './Footer';
 import useTimer from './hooks/useTimer';
+import ImageModal from './ImageModal';
 import PuzzleBoard from './PuzzleBoard';
 import TopBar from './TopBar';
 
@@ -19,6 +20,7 @@ const StyledPaper = styled(Paper)`
   padding: 15px;
   padding-top: 0;
   margin: auto;
+  margin-top: 50px;
 `;
 
 const ActivePuzzle = () => {
@@ -40,13 +42,14 @@ const ActivePuzzle = () => {
 
   return (
     <ActivePuzzleContext.Provider value={contextValue}>
-      <main>
+      <div>
         <StyledPaper>
           <TopBar />
           <PuzzleBoard />
           <Footer />
         </StyledPaper>
-      </main>
+        <ImageModal />
+      </div>
     </ActivePuzzleContext.Provider>
   );
 };

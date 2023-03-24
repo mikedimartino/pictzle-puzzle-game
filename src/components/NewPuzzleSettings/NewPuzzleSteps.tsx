@@ -14,21 +14,21 @@ import useValidateStep from './hooks/useValidateStep';
 import ImageSelector from './ImageSelector';
 import SettingsConfirmation from './SettingsConfirmation';
 
-const StyledTitle = styled(Typography)`
-  margin-bottom: 20px;
-  margin-top: 10px;
-`;
-
-const StyledMain = styled.main`
+const Wrapper = styled.div`
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
-  height: 100%;
 `;
 
 const StyledPaper = styled(Paper)`
   width: 700px;
   padding: 10px 20px;
+  margin-top: 50px;
+`;
+
+const StyledTitle = styled(Typography)`
+  margin-bottom: 20px;
+  margin-top: 10px;
 `;
 
 const StepFooter = styled.div`
@@ -82,7 +82,7 @@ const NewPuzzleSteps = () => {
   };
 
   return (
-    <StyledMain>
+    <Wrapper>
       <StyledPaper>
         <StyledTitle variant="h4">Start a New Puzzle</StyledTitle>
         <Stepper activeStep={activeStep}>{steps}</Stepper>
@@ -100,7 +100,7 @@ const NewPuzzleSteps = () => {
           </Tooltip>
         </StepFooter>
       </StyledPaper>
-    </StyledMain>
+    </Wrapper>
   );
 };
 

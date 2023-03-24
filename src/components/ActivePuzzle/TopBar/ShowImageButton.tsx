@@ -2,7 +2,7 @@ import ImageIcon from '@mui/icons-material/Image';
 import Tooltip from '@mui/material/Tooltip';
 import styled from 'styled-components';
 
-import { optionUpdated } from '../../../redux/slices/activePuzzleSlice';
+import { updateOptions } from '../../../redux/slices/activePuzzleSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 
 const StyledIcon = styled(ImageIcon)`
@@ -11,13 +11,13 @@ const StyledIcon = styled(ImageIcon)`
 
 const ShowImageButton = () => {
   const dispatch = useAppDispatch();
-  const { showImage } = useAppSelector((state) => state.activePuzzle);
+  const { showImageModal } = useAppSelector((state) => state.activePuzzle);
 
-  const color = showImage ? 'primary' : 'disabled';
-  const tooltipText = `${showImage ? 'Hide' : 'Show'} original image`;
+  const color = showImageModal ? 'primary' : 'disabled';
+  const tooltipText = `${showImageModal ? 'Hide' : 'Show'} original image`;
 
   const handleClick = () => {
-    dispatch(optionUpdated({ showImage: !showImage }));
+    dispatch(updateOptions({ showImageModal: !showImageModal }));
   };
 
   return (

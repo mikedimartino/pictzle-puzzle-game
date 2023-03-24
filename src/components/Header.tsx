@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 const StyledAppBar = styled(AppBar)`
   padding: 25px;
-  margin-bottom: 50px;
 `;
 
 const Header = () => {
