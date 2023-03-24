@@ -4,7 +4,6 @@ import { createHashRouter, RouterProvider } from 'react-router-dom';
 import styled from 'styled-components';
 
 import ActivePuzzle from './components/ActivePuzzle';
-import Header from './components/Header';
 import NewPuzzleSettings from './components/NewPuzzleSettings';
 import { store } from './redux/store';
 
@@ -28,18 +27,10 @@ const PageLayout = styled.div`
   flex-direction: column;
 `;
 
-const Main = styled.main`
-  flex-grow: 1;
-  position: relative;
-`;
-
 root.render(
   <Provider store={store}>
     <PageLayout>
-      <Header />
-      <Main>
-        <RouterProvider router={router} />
-      </Main>
+      <RouterProvider router={router} />
     </PageLayout>
   </Provider>
 );

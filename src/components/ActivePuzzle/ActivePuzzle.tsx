@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { selectIsValidPuzzle } from '../../redux/selectors';
 import { useAppSelector } from '../../redux/store';
+import Header from '../Header';
 import {
   ActivePuzzleContext,
   ActivePuzzleContextValue,
@@ -20,8 +21,7 @@ const StyledPaper = styled(Paper)`
   width: fit-content;
   padding: 15px;
   padding-top: 0;
-  margin: auto;
-  margin-top: 50px;
+  margin: 50px auto;
 `;
 
 const ActivePuzzle = () => {
@@ -44,11 +44,14 @@ const ActivePuzzle = () => {
   return (
     <ActivePuzzleContext.Provider value={contextValue}>
       <div>
-        <StyledPaper>
-          <TopBar />
-          <PuzzleBoard />
-          <Footer />
-        </StyledPaper>
+        <Header />
+        <main>
+          <StyledPaper>
+            <TopBar />
+            <PuzzleBoard />
+            <Footer />
+          </StyledPaper>
+        </main>
         <ImageModal />
         <CompletionModal />
       </div>

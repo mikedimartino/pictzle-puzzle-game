@@ -24,6 +24,7 @@ const StyledPaper = styled(Paper)`
   width: 700px;
   padding: 10px 20px;
   margin-top: 50px;
+  margin-bottom: 50px;
 `;
 
 const StyledTitle = styled(Typography)`

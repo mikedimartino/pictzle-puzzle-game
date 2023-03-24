@@ -6,6 +6,7 @@ import {
   DEFAULT_DIFFICULTY,
   Difficulty,
 } from '../../constants';
+import Header from '../Header';
 import NewPuzzleSteps from './NewPuzzleSteps';
 import { SettingsContext, SettingsContextValue } from './SettingsContext';
 
@@ -34,7 +35,10 @@ const NewPuzzleSettings = () => {
 
   return (
     <SettingsContext.Provider value={contextValue}>
-      <NewPuzzleSteps />
+      <Header />
+      <main>
+        <NewPuzzleSteps />
+      </main>
     </SettingsContext.Provider>
   );
 };
