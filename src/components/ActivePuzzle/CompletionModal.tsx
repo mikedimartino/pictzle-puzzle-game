@@ -1,3 +1,4 @@
+import TrophyIcon from '@mui/icons-material/EmojiEvents';
 import Dialog from '@mui/material/Dialog';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
@@ -12,6 +13,12 @@ const DELAY = 1000;
 
 const ContentWrapper = styled(Paper)`
   padding: 25px 40px;
+`;
+
+const TrophyIconWrapper = styled.div`
+  text-align: center;
+  font-size: 75px;
+  margin-bottom: -10px;
 `;
 
 const CompletionModal = () => {
@@ -38,11 +45,14 @@ const CompletionModal = () => {
       onClose={() => setHasClosed(true)}
     >
       <ContentWrapper>
-        <Typography variant="h6">Puzzle Solved!</Typography>
-        <Typography variant="body1">
+        <TrophyIconWrapper>
+          <TrophyIcon htmlColor="gold" fontSize="inherit" />
+        </TrophyIconWrapper>
+        <Typography variant="h4">Puzzle Solved!</Typography>
+        <Typography variant="subtitle1">
           Time taken: {formatSeconds(totalSecondsTakenToSolve)}
         </Typography>
-        <Typography variant="body1">Total moves: {totalMoves}</Typography>
+        <Typography variant="subtitle1">Total moves: {totalMoves}</Typography>
       </ContentWrapper>
     </Dialog>
   );
