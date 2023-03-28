@@ -1,7 +1,7 @@
 # Pictzle
 ### Image scrambling puzzle game built with React.
 
-Try it out [here](https://d1futzyogg9fn5.cloudfront.net/pictzle-puzzle-game/).
+Try it out [here](https://mikedimartino.com/pictzle-puzzle-game/).
 
 To run locally:
 ```
